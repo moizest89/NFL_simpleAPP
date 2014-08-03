@@ -240,6 +240,12 @@ int drawable abs__textfield_searchview_right_holo_dark 0x7f02006d
 int drawable abs__textfield_searchview_right_holo_light 0x7f02006e
 int drawable abs__toast_frame 0x7f02006f
 int drawable ic_launcher 0x7f020070
+int drawable place_holder_nfl 0x7f020071
+int id IVImageNotice 0x7f040037
+int id LVNoticesList 0x7f040036
+int id PBList 0x7f040035
+int id TVDescriptionNotice 0x7f040039
+int id TVTitleNotice 0x7f040038
 int id abs__action_bar 0x7f040020
 int id abs__action_bar_container 0x7f04001f
 int id abs__action_bar_subtitle 0x7f040011
@@ -279,6 +285,9 @@ int id abs__submit_area 0x7f04002f
 int id abs__textButton 0x7f040013
 int id abs__title 0x7f04001b
 int id abs__up 0x7f04000b
+int id activity_main_description_container 0x7f040034
+int id activity_main_list_container 0x7f040033
+int id activity_main_root_container 0x7f040032
 int id disableHome 0x7f040009
 int id edit_query 0x7f040026
 int id homeAsUp 0x7f040006
@@ -312,8 +321,11 @@ int layout abs__screen_simple_overlay_action_mode 0x7f030011
 int layout abs__search_dropdown_item_icons_2line 0x7f030012
 int layout abs__search_view 0x7f030013
 int layout abs__simple_dropdown_hint 0x7f030014
-int layout sherlock_spinner_dropdown_item 0x7f030015
-int layout sherlock_spinner_item 0x7f030016
+int layout activity_main 0x7f030015
+int layout fragment_list 0x7f030016
+int layout item_notice_list 0x7f030017
+int layout sherlock_spinner_dropdown_item 0x7f030018
+int layout sherlock_spinner_item 0x7f030019
 int string abs__action_bar_home_description 0x7f090000
 int string abs__action_bar_up_description 0x7f090001
 int string abs__action_menu_overflow_description 0x7f090002

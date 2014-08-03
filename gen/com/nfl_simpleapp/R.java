@@ -903,8 +903,14 @@ containing a value of this type.
         public static final int abs__textfield_searchview_right_holo_light=0x7f02006e;
         public static final int abs__toast_frame=0x7f02006f;
         public static final int ic_launcher=0x7f020070;
+        public static final int place_holder_nfl=0x7f020071;
     }
     public static final class id {
+        public static final int IVImageNotice=0x7f040037;
+        public static final int LVNoticesList=0x7f040036;
+        public static final int PBList=0x7f040035;
+        public static final int TVDescriptionNotice=0x7f040039;
+        public static final int TVTitleNotice=0x7f040038;
         public static final int abs__action_bar=0x7f040020;
         public static final int abs__action_bar_container=0x7f04001f;
         public static final int abs__action_bar_subtitle=0x7f040011;
@@ -944,6 +950,9 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040013;
         public static final int abs__title=0x7f04001b;
         public static final int abs__up=0x7f04000b;
+        public static final int activity_main_description_container=0x7f040034;
+        public static final int activity_main_list_container=0x7f040033;
+        public static final int activity_main_root_container=0x7f040032;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f040026;
         public static final int homeAsUp=0x7f040006;
@@ -981,8 +990,11 @@ containing a value of this type.
         public static final int abs__search_dropdown_item_icons_2line=0x7f030012;
         public static final int abs__search_view=0x7f030013;
         public static final int abs__simple_dropdown_hint=0x7f030014;
-        public static final int sherlock_spinner_dropdown_item=0x7f030015;
-        public static final int sherlock_spinner_item=0x7f030016;
+        public static final int activity_main=0x7f030015;
+        public static final int fragment_list=0x7f030016;
+        public static final int item_notice_list=0x7f030017;
+        public static final int sherlock_spinner_dropdown_item=0x7f030018;
+        public static final int sherlock_spinner_item=0x7f030019;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1027,12 +1039,7 @@ containing a value of this type.
         public static final int app_name=0x7f09000d;
     }
     public static final class style {
-        /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
- Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
+        /**  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0a0059;
         public static final int Sherlock___TextAppearance_Small=0x7f0a0046;
