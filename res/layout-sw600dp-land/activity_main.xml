@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:orientation="horizontal" >
-
+	
+    
     <FrameLayout
         android:id="@+id/activity_main_list_container"
         android:layout_width="0dp"

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/SVContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" 
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:id="@+id/IVDescriptionImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/place_holder_nfl" />
+			<TextView
+		        android:id="@+id/TVDescriptionTitle"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:textStyle="bold"
+		        android:padding="10dp"
+		        android:textSize="16sp"
+		         />
+			<TextView
+		        android:id="@+id/TVDescriptionNotice"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:paddingLeft="10dp"
+		        android:paddingRight="10dp"
+		        android:textSize="14sp"
+		        />
+        </LinearLayout>
+    </ScrollView>
+
+    
+
+</LinearLayout>

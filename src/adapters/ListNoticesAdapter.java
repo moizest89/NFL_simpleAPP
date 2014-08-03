@@ -3,9 +3,6 @@ package adapters;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.androidquery.AQuery;
-import com.nfl_simpleapp.R;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -14,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.androidquery.AQuery;
+import com.nfl_simpleapp.R;
 
 public class ListNoticesAdapter extends BaseAdapter{
 	
@@ -52,6 +52,7 @@ public class ListNoticesAdapter extends BaseAdapter{
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		View vi=convertView;
@@ -76,6 +77,7 @@ public class ListNoticesAdapter extends BaseAdapter{
 		TVTitleNotice.setText(title);
 		TVDescriptionNotice.setText(article_excerpt);
 		aq.id((ImageView) IVImageNotice).image((article_picture), false, true,0, R.drawable.place_holder_nfl,preset,0,1.0f/1.0f);
+		vi.setTag(position);
 		return vi;
 	}
 

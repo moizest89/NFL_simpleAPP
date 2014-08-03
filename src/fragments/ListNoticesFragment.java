@@ -8,14 +8,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import adapters.ListNoticesAdapter;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.android.volley.Request;
@@ -25,9 +29,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.nfl_simpleapp.NoticeDetailActivity;
 import com.nfl_simpleapp.R;
 
-public class ListNoticesFragment extends SherlockFragment{
+public class ListNoticesFragment<DisplayFragment> extends SherlockFragment{
 	
 	private static final String TAG = ListNoticesFragment.class.getSimpleName();
 	private String URL_CONNECTION = "http://glacial-earth-4981.herokuapp.com/v1/articles";
@@ -39,6 +44,7 @@ public class ListNoticesFragment extends SherlockFragment{
 	ArrayList<HashMap<String,Object>> jsonNotices = new ArrayList<HashMap<String,Object>>();
 	
 	
+
 	public static ListNoticesFragment newInstance(){
 		
 		ListNoticesFragment newListFragment = new ListNoticesFragment();
@@ -67,6 +73,42 @@ public class ListNoticesFragment extends SherlockFragment{
 		ListNoticesAdapter = new ListNoticesAdapter(getActivity(),jsonNotices);
 		LVNoticesList.setAdapter(ListNoticesAdapter);
 		getNoticesData(URL_CONNECTION);
+		
+//		DisplayFragment displayFrag = (DisplayFragment) getFragmentManager()
+//                .findFragmentById(R.id.display_frag);
+		LVNoticesList.setOnItemClickListener(new OnItemClickListener(){
+			@SuppressWarnings("unchecked")
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				ViewGroup mContainerLayout = (ViewGroup) getActivity().findViewById(R.id.activity_main_description_container);
+				if(mContainerLayout == null){
+//					Toast.makeText(getActivity(), "Activity", Toast.LENGTH_LONG).show();
+					
+					HashMap<String, Object> data = new HashMap<String,Object>(); 
+					data =  jsonNotices.get(position);
+					
+					String title = (String) data.get("title");
+					String content = (String) data.get("content");
+					
+					ArrayList<HashMap<String,Object>> pictures = new ArrayList<HashMap<String,Object>>();
+					pictures = (ArrayList<HashMap<String, Object>>) data.get("article_pictures");
+					
+					String article_picture = (String) pictures.get(0).get("image_name");
+					
+					
+					Intent intent = new Intent(getActivity(),NoticeDetailActivity.class);
+					intent.putExtra("title", title);
+					intent.putExtra("content", content);
+					intent.putExtra("article_picture",article_picture);
+					getActivity().startActivity(intent);
+					
+				}else{
+					Toast.makeText(getActivity(), "Fragment", Toast.LENGTH_LONG).show();
+				}
+			}
+			
+		});
 		return v;
 		
 	}
