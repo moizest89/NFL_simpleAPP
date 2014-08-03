@@ -22,6 +22,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.nfl_simpleapp.R;
@@ -72,26 +73,24 @@ public class ListNoticesFragment extends SherlockFragment{
 	
 	private void getNoticesData(String URL){
 		listNoticesRequest = Volley.newRequestQueue(getActivity());
-		System.out.println("URL_CONNECTION: "+URL_CONNECTION);
 		jsonListNoticesRequest = new JsonObjectRequest(Request.Method.GET, URL, null, 
 			new Response.Listener<JSONObject>() {
 				@Override
 				public void onResponse(JSONObject response) {
 					setNoticesData(response);
-				}
-			//new Response.Listener<JSONObject>()					
+				}					
 			}, new Response.ErrorListener() {
 				@Override
 				public void onErrorResponse(VolleyError error) {
 					//If Request has error
+					VolleyLog.d("Volley", error.getMessage());
 				}
 			});
-		jsonListNoticesRequest.setShouldCache(false);
+		jsonListNoticesRequest.setShouldCache(true);
 		listNoticesRequest.add(jsonListNoticesRequest);
 	}
 	
 	private void setNoticesData(JSONObject data){
-		System.out.println(data);
 		try {
 			jsonNotices.clear();
 			JSONArray articles = data.getJSONArray("articles");
@@ -102,12 +101,27 @@ public class ListNoticesFragment extends SherlockFragment{
 				String content = article.getString("content");
 				String created_at = article.getString("created_at");
 				String article_excerpt = article.getString("article_excerpt");
-				HashMap<String,Object> map = new HashMap<String,Object>();
 				
+				
+				JSONArray article_pictures = article.getJSONArray("article_pictures");
+				
+				ArrayList<HashMap<String,Object>> pictures = new ArrayList<HashMap<String,Object>>();
+				pictures.clear();
+				for(int art_pic = 0; art_pic < article_pictures.length(); art_pic++){
+					JSONObject article_picture = ((JSONObject) article_pictures.get(art_pic)).getJSONObject("article_picture");
+					
+					String image_name = article_picture.getString("picture_web_slide_non_retina_url");
+					HashMap<String,Object> pictures_map = new HashMap<String,Object>();
+					pictures_map.put("image_name", image_name);
+					pictures.add(pictures_map);
+				}
+				
+				HashMap<String,Object> map = new HashMap<String,Object>();
 				map.put("title", title);
 				map.put("content", content);
 				map.put("created_at", created_at);
 				map.put("article_excerpt", article_excerpt);
+				map.put("article_pictures", pictures);
 				
 				jsonNotices.add(map);
 			}
