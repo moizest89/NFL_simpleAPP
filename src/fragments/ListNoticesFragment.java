@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.MenuItem;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -42,8 +43,9 @@ public class ListNoticesFragment<DisplayFragment> extends SherlockFragment{
 	BaseAdapter ListNoticesAdapter;
 	ArrayList<HashMap<String,Object>> jsonNotices = new ArrayList<HashMap<String,Object>>();
 	ViewGroup mContainerLayout;
+	Boolean loadData = false,isMenuTouch = false;
+	private MenuItem menuItem;
 	
-
 	public static ListNoticesFragment newInstance(){
 		ListNoticesFragment newListFragment = new ListNoticesFragment();
 		
@@ -114,10 +116,13 @@ public class ListNoticesFragment<DisplayFragment> extends SherlockFragment{
 				@Override
 				public void onErrorResponse(VolleyError error) {
 					VolleyLog.d(TAG, "Error: " + error.getMessage());
+					loadData = true;
+					setHasOptionsMenu(true);
 				}
 			});
 		listNoticesRequest.add(jsonListNoticesRequest);
 	}
+	
 	
 	private void setNoticesData(JSONArray response){
 		try {
@@ -191,6 +196,38 @@ public class ListNoticesFragment<DisplayFragment> extends SherlockFragment{
 			ListDescriptionNoticesFragment.class.getName());
 			// Commit the transaction
 			fragmentTransaction.commit();
+		}
+		if(isMenuTouch){
+			menuItem.collapseActionView();
+            menuItem.setActionView(null);
+            isMenuTouch = false;
+		}
+		loadData = true;
+		setHasOptionsMenu(true);
+	}
+	
+	@Override
+	public void onPrepareOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		super.onPrepareOptionsMenu(menu);
+		menu.clear();
+		if(loadData){
+			getSherlockActivity().getSupportMenuInflater().inflate(R.menu.menu_reload_data, menu);
+		}
+		
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		menuItem = item;
+		switch (item.getItemId()) {
+	    case R.id.menu_reload: 
+	    	menuItem.setActionView(R.layout.progress_menu);
+  			menuItem.expandActionView();
+  			isMenuTouch = true;
+  			getNoticesData(URL_CONNECTION);
+	    	return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
 		}
 	}
 }

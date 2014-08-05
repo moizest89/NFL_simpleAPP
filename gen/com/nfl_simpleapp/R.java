@@ -1277,16 +1277,17 @@ containing a value of this type.
         public static final int common_signin_btn_text_pressed_dark=0x7f020086;
         public static final int common_signin_btn_text_pressed_light=0x7f020087;
         public static final int ic_action_map=0x7f020088;
-        public static final int ic_action_share=0x7f020089;
-        public static final int ic_launcher=0x7f02008a;
-        public static final int ic_plusone_medium_off_client=0x7f02008b;
-        public static final int ic_plusone_small_off_client=0x7f02008c;
-        public static final int ic_plusone_standard_off_client=0x7f02008d;
-        public static final int ic_plusone_tall_off_client=0x7f02008e;
-        public static final int logo=0x7f02008f;
-        public static final int place_holder_nfl=0x7f020090;
-        public static final int powered_by_google_dark=0x7f020091;
-        public static final int powered_by_google_light=0x7f020092;
+        public static final int ic_action_refresh=0x7f020089;
+        public static final int ic_action_share=0x7f02008a;
+        public static final int ic_launcher=0x7f02008b;
+        public static final int ic_plusone_medium_off_client=0x7f02008c;
+        public static final int ic_plusone_small_off_client=0x7f02008d;
+        public static final int ic_plusone_standard_off_client=0x7f02008e;
+        public static final int ic_plusone_tall_off_client=0x7f02008f;
+        public static final int logo=0x7f020090;
+        public static final int place_holder_nfl=0x7f020091;
+        public static final int powered_by_google_dark=0x7f020092;
+        public static final int powered_by_google_light=0x7f020093;
     }
     public static final class id {
         public static final int IVDescriptionImage=0x7f07004e;
@@ -1294,6 +1295,7 @@ containing a value of this type.
         public static final int LVNoticesList=0x7f07004c;
         public static final int PBList=0x7f07004b;
         public static final int PBPinch=0x7f070049;
+        public static final int PGActionBar=0x7f070053;
         public static final int SVContainer=0x7f07004d;
         public static final int TIVPinchImage=0x7f07004a;
         public static final int TVDescriptionNotice=0x7f070050;
@@ -1356,8 +1358,9 @@ containing a value of this type.
         public static final int listMode=0x7f070014;
         public static final int mapview=0x7f070044;
         public static final int match_parent=0x7f07000c;
-        public static final int menu_map=0x7f070053;
-        public static final int menu_share=0x7f070054;
+        public static final int menu_map=0x7f070054;
+        public static final int menu_reload=0x7f070055;
+        public static final int menu_share=0x7f070056;
         public static final int monochrome=0x7f070013;
         public static final int none=0x7f070000;
         public static final int normal=0x7f070001;
@@ -1408,12 +1411,14 @@ containing a value of this type.
         public static final int fragment_list=0x7f030019;
         public static final int item_notice_detail=0x7f03001a;
         public static final int item_notice_list=0x7f03001b;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001c;
-        public static final int sherlock_spinner_item=0x7f03001d;
+        public static final int progress_menu=0x7f03001c;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001d;
+        public static final int sherlock_spinner_item=0x7f03001e;
     }
     public static final class menu {
         public static final int menu_map=0x7f0b0000;
-        public static final int menu_share=0x7f0b0001;
+        public static final int menu_reload_data=0x7f0b0001;
+        public static final int menu_share=0x7f0b0002;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1546,6 +1551,7 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f060018;
         public static final int menu_map=0x7f060028;
+        public static final int menu_reload=0x7f06002a;
         public static final int menu_share=0x7f060029;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
