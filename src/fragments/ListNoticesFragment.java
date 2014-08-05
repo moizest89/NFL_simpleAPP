@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import adapters.ListNoticesAdapter;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,34 +20,31 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.nfl_simpleapp.MainActivity;
 import com.nfl_simpleapp.NoticeDetailActivity;
 import com.nfl_simpleapp.R;
 
 public class ListNoticesFragment<DisplayFragment> extends SherlockFragment{
 	
 	private static final String TAG = ListNoticesFragment.class.getSimpleName();
-	private String URL_CONNECTION = "http://glacial-earth-4981.herokuapp.com/v1/articles";
+	private String URL_CONNECTION = "https://s3.amazonaws.com/jon-hancock-phunware/nflapi-static.json";
 	ProgressBar PBList;
 	ListView LVNoticesList;
 	RequestQueue listNoticesRequest;
-	JsonObjectRequest jsonListNoticesRequest;
 	BaseAdapter ListNoticesAdapter;
 	ArrayList<HashMap<String,Object>> jsonNotices = new ArrayList<HashMap<String,Object>>();
-	
+	ViewGroup mContainerLayout;
 	
 
 	public static ListNoticesFragment newInstance(){
-		
 		ListNoticesFragment newListFragment = new ListNoticesFragment();
 		
 		return newListFragment;
@@ -74,37 +72,26 @@ public class ListNoticesFragment<DisplayFragment> extends SherlockFragment{
 		LVNoticesList.setAdapter(ListNoticesAdapter);
 		getNoticesData(URL_CONNECTION);
 		
-//		DisplayFragment displayFrag = (DisplayFragment) getFragmentManager()
-//                .findFragmentById(R.id.display_frag);
 		LVNoticesList.setOnItemClickListener(new OnItemClickListener(){
 			@SuppressWarnings("unchecked")
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
-				ViewGroup mContainerLayout = (ViewGroup) getActivity().findViewById(R.id.activity_main_description_container);
+				mContainerLayout = (ViewGroup) getActivity().findViewById(R.id.activity_main_description_container);
 				if(mContainerLayout == null){
-//					Toast.makeText(getActivity(), "Activity", Toast.LENGTH_LONG).show();
-					
 					HashMap<String, Object> data = new HashMap<String,Object>(); 
 					data =  jsonNotices.get(position);
-					
-					String title = (String) data.get("title");
-					String content = (String) data.get("content");
-					
-					ArrayList<HashMap<String,Object>> pictures = new ArrayList<HashMap<String,Object>>();
-					pictures = (ArrayList<HashMap<String, Object>>) data.get("article_pictures");
-					
-					String article_picture = (String) pictures.get(0).get("image_name");
-					
-					
 					Intent intent = new Intent(getActivity(),NoticeDetailActivity.class);
-					intent.putExtra("title", title);
-					intent.putExtra("content", content);
-					intent.putExtra("article_picture",article_picture);
+					intent.putExtra("data", data);
+					
 					getActivity().startActivity(intent);
 					
 				}else{
-					Toast.makeText(getActivity(), "Fragment", Toast.LENGTH_LONG).show();
+					try{
+						MainActivity.setDataInPaneTablet(getChildFragmentManager());
+					}catch(Exception e){
+						Log.e(TAG, e.getMessage());
+					}
 				}
 			}
 			
@@ -114,56 +101,77 @@ public class ListNoticesFragment<DisplayFragment> extends SherlockFragment{
 	}
 	
 	private void getNoticesData(String URL){
-		listNoticesRequest = Volley.newRequestQueue(getActivity());
-		jsonListNoticesRequest = new JsonObjectRequest(Request.Method.GET, URL, null, 
-			new Response.Listener<JSONObject>() {
+		RequestQueue listNoticesRequest = Volley.newRequestQueue(getActivity());
+		
+		JsonArrayRequest jsonListNoticesRequest = new JsonArrayRequest(URL,
+			new Response.Listener<JSONArray>() {
 				@Override
-				public void onResponse(JSONObject response) {
+				public void onResponse(JSONArray response) {
+					
 					setNoticesData(response);
-				}					
+				}
 			}, new Response.ErrorListener() {
 				@Override
 				public void onErrorResponse(VolleyError error) {
-					//If Request has error
-					VolleyLog.d("Volley", error.getMessage());
+					VolleyLog.d(TAG, "Error: " + error.getMessage());
 				}
 			});
-		jsonListNoticesRequest.setShouldCache(true);
 		listNoticesRequest.add(jsonListNoticesRequest);
 	}
 	
-	private void setNoticesData(JSONObject data){
+	private void setNoticesData(JSONArray response){
 		try {
 			jsonNotices.clear();
-			JSONArray articles = data.getJSONArray("articles");
-			for(int item_notice = 0; item_notice < articles.length() ; item_notice ++){
-				JSONObject article = ((JSONObject) articles.get(item_notice)).getJSONObject("article");
+			for(int items = 0; items < response.length() ; items ++){
+				JSONObject dataItem = response.getJSONObject(items);
 				
-				String title = article.getString("title");
-				String content = article.getString("content");
-				String created_at = article.getString("created_at");
-				String article_excerpt = article.getString("article_excerpt");
+				String zip = (String) dataItem.get("zip");
+				String phone = (String)dataItem.get("phone");
+				String ticket_link = (String) dataItem.get("ticket_link");
+				String state = (String) dataItem.get("state");
+				Integer pcode = (Integer) dataItem.get("pcode");
+				String city = (String) dataItem.get("city");
+				Integer id = (Integer) dataItem.get("id");
+				String tollfreephone = (String) dataItem.get("tollfreephone");
+				String address = (String) dataItem.get("address");
+				String image_url = (String) dataItem.get("image_url");
+				String description = (String) dataItem.get("description");
+				String name = (String) dataItem.get("name");
+				Double longitude = (Double) dataItem.get("longitude");
+				Double latitude = (Double) dataItem.get("latitude");
 				
 				
-				JSONArray article_pictures = article.getJSONArray("article_pictures");
-				
-				ArrayList<HashMap<String,Object>> pictures = new ArrayList<HashMap<String,Object>>();
-				pictures.clear();
-				for(int art_pic = 0; art_pic < article_pictures.length(); art_pic++){
-					JSONObject article_picture = ((JSONObject) article_pictures.get(art_pic)).getJSONObject("article_picture");
+				JSONArray schedule = dataItem.getJSONArray("schedule");
+//				
+				ArrayList<HashMap<String,Object>> schedules = new ArrayList<HashMap<String,Object>>();
+				schedules.clear();
+				for(int sch = 0; sch < schedule.length(); sch++){
+					JSONObject OBJDate = (JSONObject) schedule.get(sch);
+					String end_date = OBJDate.getString("end_date");
+					String start_date = OBJDate.getString("start_date");
 					
-					String image_name = article_picture.getString("picture_web_slide_non_retina_url");
-					HashMap<String,Object> pictures_map = new HashMap<String,Object>();
-					pictures_map.put("image_name", image_name);
-					pictures.add(pictures_map);
+					HashMap<String,Object> date_map = new HashMap<String,Object>();
+					date_map.put("end_date", end_date);
+					date_map.put("start_date", start_date);
+					schedules.add(date_map);
 				}
 				
 				HashMap<String,Object> map = new HashMap<String,Object>();
-				map.put("title", title);
-				map.put("content", content);
-				map.put("created_at", created_at);
-				map.put("article_excerpt", article_excerpt);
-				map.put("article_pictures", pictures);
+				map.put("zip",zip);
+				map.put("phone",phone);
+				map.put("ticket_link",ticket_link);
+				map.put("state",state);
+				map.put("pcode",pcode);
+				map.put("city",city);
+				map.put("id",id);
+				map.put("tollfreephone",tollfreephone);
+				map.put("address",address);
+				map.put("image_url",image_url);
+				map.put("description",description);
+				map.put("name",name);
+				map.put("longitude",longitude);
+				map.put("latitude",latitude);
+				map.put("schedules", schedules);
 				
 				jsonNotices.add(map);
 			}
@@ -176,5 +184,13 @@ public class ListNoticesFragment<DisplayFragment> extends SherlockFragment{
 		ListNoticesAdapter.notifyDataSetChanged();
 		PBList.setVisibility(View.INVISIBLE);
 		LVNoticesList.setVisibility(View.VISIBLE);
+		if(mContainerLayout != null){
+			ListDescriptionNoticesFragment descriptionFragment = new ListDescriptionNoticesFragment();
+			FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+			fragmentTransaction.replace(mContainerLayout.getId(), descriptionFragment,
+			ListDescriptionNoticesFragment.class.getName());
+			// Commit the transaction
+			fragmentTransaction.commit();
+		}
 	}
 }

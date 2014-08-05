@@ -53,13 +53,16 @@ public class ListDescriptionNoticesFragment extends SherlockFragment{
 		TVDescriptionNotice = (TextView) v.findViewById(R.id.TVDescriptionNotice);
 		
 		if(is_load){
-			TVDescriptionTitle.setText("title_notice");
-			TVDescriptionNotice.setText("description_notice");
+			
 		}
 		
 		return v;
 	}
 	
 	
+	public void setValuesInView(String title, String description){
+		TVDescriptionTitle.setText(title);
+		TVDescriptionNotice.setText(description);
+	}
 	
 }

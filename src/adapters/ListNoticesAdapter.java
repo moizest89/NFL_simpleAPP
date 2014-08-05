@@ -55,30 +55,36 @@ public class ListNoticesAdapter extends BaseAdapter{
 	@SuppressWarnings("unchecked")
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		View vi=convertView;
+		View vi = convertView;
+		ViewHolder holder;
 		
-		
-		
-		vi = inflater.inflate(R.layout.item_notice_list, null);
-		
-		//Get items view
-		ImageView IVImageNotice = (ImageView) vi.findViewById(R.id.IVImageNotice);
-		TextView TVTitleNotice = (TextView) vi.findViewById(R.id.TVTitleNotice);
-		TextView TVDescriptionNotice = (TextView) vi.findViewById(R.id.TVDescriptionNotice);
- 		
+		if (convertView == null) {
+			vi = inflater.inflate(R.layout.item_notice_list, null);
+			//Get items view
+			holder = new ViewHolder();
+			holder.IVImageNotice = (ImageView) vi.findViewById(R.id.IVImageNotice);
+			holder.TVTitleNotice = (TextView) vi.findViewById(R.id.TVTitleNotice);
+			holder.TVDescriptionNotice = (TextView) vi.findViewById(R.id.TVDescriptionNotice);
+			vi.setTag(holder);
+		}else{
+			holder = (ViewHolder) vi.getTag();
+		}
 		//Get items data
-		String title = (String) data.get(position).get("title");
-		String article_excerpt = (String) data.get(position).get("article_excerpt");
-		ArrayList<HashMap<String,Object>> pictures = new ArrayList<HashMap<String,Object>>();
-		pictures = (ArrayList<HashMap<String, Object>>) data.get(position).get("article_pictures");
+		String title = (String) data.get(position).get("name");
+		String address = (String) data.get(position).get("address");
 		
-		String article_picture = (String) pictures.get(0).get("image_name");
+		String article_picture = (String) data.get(position).get("image_url");
 		//Set data in element view
-		TVTitleNotice.setText(title);
-		TVDescriptionNotice.setText(article_excerpt);
-		aq.id((ImageView) IVImageNotice).image((article_picture), false, true,0, R.drawable.place_holder_nfl,preset,0,1.0f/1.0f);
-		vi.setTag(position);
+		holder.TVTitleNotice.setText(title);
+		holder.TVDescriptionNotice.setText(address);
+		aq.id((ImageView) holder.IVImageNotice).image((article_picture), true, true,0, R.drawable.place_holder_nfl,preset,0,3.0f/4.0f);
 		return vi;
+	}
+	
+	public class ViewHolder {
+		TextView TVTitleNotice;
+		TextView TVDescriptionNotice;
+		ImageView IVImageNotice;
 	}
 
 }

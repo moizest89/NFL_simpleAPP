@@ -1,5 +1,7 @@
 package com.nfl_simpleapp;
 
+import java.util.HashMap;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -17,9 +19,11 @@ public class NoticeDetailActivity extends SherlockFragmentActivity{
 	ImageView IVDescriptionImage;
 	TextView TVDescriptionTitle,TVDescriptionNotice;
 	String title,content,article_picture;
+	HashMap<String, Object> data = new HashMap<String,Object>();
 	AQuery aq;
 	Bitmap preset;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle saveInstance) {
 		super.onCreate(saveInstance);
@@ -40,9 +44,10 @@ public class NoticeDetailActivity extends SherlockFragmentActivity{
 		//Get bundle for data in previews activity
 		Bundle extras = getIntent().getExtras();
 		if(extras !=null){
-			title = (String) extras.get("title");
-			content = (String) extras.get("content");
-			article_picture = (String) extras.getString("article_picture");
+			data = (HashMap<String, Object>) extras.get("data");
+			title = (String) data.get("name");
+			content = (String) data.get("address");
+			article_picture = (String) data.get("image_url");
 		}
 		
 		

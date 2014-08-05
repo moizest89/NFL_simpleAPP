@@ -16,6 +16,7 @@
             android:id="@+id/IVImageNotice"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:minHeight="60dp"
             android:scaleType="centerCrop"
             android:src="@drawable/place_holder_nfl" />
         

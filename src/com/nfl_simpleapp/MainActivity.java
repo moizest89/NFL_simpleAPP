@@ -1,11 +1,10 @@
 package com.nfl_simpleapp;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 
@@ -16,7 +15,9 @@ public class MainActivity extends SherlockFragmentActivity{
 	//
 	private static final String TAG = MainActivity.class.getSimpleName();
 	
-	private ViewGroup mListLayout, mContainerLayout;
+	private ViewGroup mListLayout;
+
+	private static ViewGroup mContainerLayout;
 	
 	
 	@Override
@@ -42,19 +43,31 @@ public class MainActivity extends SherlockFragmentActivity{
 			}
 			mContainerLayout = (ViewGroup) findViewById(R.id.activity_main_description_container);
 			if(mContainerLayout !=null){
-//				ListDescriptionNoticesFragment descriptionFragment = new ListDescriptionNoticesFragment();
-//				FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//				fragmentTransaction.replace(
-//						mListLayout.getId(), 
-//						descriptionFragment,
-//				ListDescriptionNoticesFragment.class.getName());
-//				
-//				// Commit the transaction
-//				fragmentTransaction.commit();
+				ListDescriptionNoticesFragment descriptionFragment = new ListDescriptionNoticesFragment();
+				FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+				fragmentTransaction.replace(
+						mContainerLayout.getId(), 
+						descriptionFragment,
+				ListDescriptionNoticesFragment.class.getName());
+				
+				// Commit the transaction
+				fragmentTransaction.commit();
 				
 			}
 		}
 		
+
+	}
+	public static void setDataInPaneTablet(FragmentManager frg){
+		ListDescriptionNoticesFragment descriptionFragment = new ListDescriptionNoticesFragment();
+		FragmentTransaction fragmentTransaction = frg.beginTransaction();
+		fragmentTransaction.replace(
+				mContainerLayout.getId(), 
+				descriptionFragment,
+		ListDescriptionNoticesFragment.class.getName());
+		
+		// Commit the transaction
+		fragmentTransaction.commit();
 	}
 	
 	
