@@ -1,5 +1,6 @@
 <resources>
 
     <string name="app_name">NFL</string>
-
+    <string name="menu_map">View event location</string>
+	<string name="menu_share">Share event</string>
 </resources>

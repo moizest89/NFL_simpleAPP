@@ -11,7 +11,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 public class SplashActivity extends SherlockActivity{
 	
 	
-	private long splashDelay = 4000; //6 segundos
+	private long splashDelay = 4000;
 	
 	
 	@Override
@@ -24,7 +24,7 @@ public class SplashActivity extends SherlockActivity{
 		      @Override
 		      public void run() {
 		        Intent mainIntent;
-		        mainIntent = new Intent().setClass(SplashActivity.this, LocationEventActivity.class);
+		        mainIntent = new Intent().setClass(SplashActivity.this, MainActivity.class);
 		        startActivity(mainIntent);
 		        finish();
 		      }
