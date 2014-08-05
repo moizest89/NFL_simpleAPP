@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,7 +31,7 @@ public class NoticeDetailActivity extends SherlockFragmentActivity{
 		super.onCreate(saveInstance);
 		
 		setContentView(R.layout.item_notice_detail);
-		
+		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#082456")));
 		
 		//Get elements in view
 		IVDescriptionImage = (ImageView) findViewById(R.id.IVDescriptionImage);

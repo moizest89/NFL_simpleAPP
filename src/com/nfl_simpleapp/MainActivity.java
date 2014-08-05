@@ -1,5 +1,7 @@
 package com.nfl_simpleapp;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -26,6 +28,8 @@ public class MainActivity extends SherlockFragmentActivity{
 		
 		Log.v(TAG, "onCreate: savedInstanceState " + (savedInstanceState == null ? "==" : "!=") + " null");
 		
+		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#082456")));
+
 		setContentView(R.layout.activity_main);
 		
 		if (savedInstanceState != null) {

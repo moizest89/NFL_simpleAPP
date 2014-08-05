@@ -24,7 +24,7 @@ public class SplashActivity extends SherlockActivity{
 		      @Override
 		      public void run() {
 		        Intent mainIntent;
-		        mainIntent = new Intent().setClass(SplashActivity.this, MainActivity.class);
+		        mainIntent = new Intent().setClass(SplashActivity.this, LocationEventActivity.class);
 		        startActivity(mainIntent);
 		        finish();
 		      }
