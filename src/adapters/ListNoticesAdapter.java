@@ -51,8 +51,7 @@ public class ListNoticesAdapter extends BaseAdapter{
 		return position;
 		
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		View vi = convertView;

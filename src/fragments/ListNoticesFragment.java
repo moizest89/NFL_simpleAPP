@@ -29,7 +29,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.nfl_simpleapp.MainActivity;
 import com.nfl_simpleapp.NoticeDetailActivity;
 import com.nfl_simpleapp.R;
 
@@ -45,12 +44,6 @@ public class ListNoticesFragment<DisplayFragment> extends SherlockFragment{
 	ViewGroup mContainerLayout;
 	Boolean loadData = false,isMenuTouch = false;
 	private MenuItem menuItem;
-	
-	public static ListNoticesFragment newInstance(){
-		ListNoticesFragment newListFragment = new ListNoticesFragment();
-		
-		return newListFragment;
-	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -75,7 +68,6 @@ public class ListNoticesFragment<DisplayFragment> extends SherlockFragment{
 		getNoticesData(URL_CONNECTION);
 		
 		LVNoticesList.setOnItemClickListener(new OnItemClickListener(){
-			@SuppressWarnings("unchecked")
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {

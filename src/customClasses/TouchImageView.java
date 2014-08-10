@@ -17,7 +17,6 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -29,9 +28,7 @@ import android.widget.Scroller;
 
 public class TouchImageView extends ImageView{
 	
-private static final String DEBUG = "DEBUG";
-	
-	//
+//
 	// SuperMin and SuperMax multipliers. Determine how much the image can be
 	// zoomed below or above the zoom boundaries, before animating back to the
 	// min/max zoom boundary.
@@ -1257,9 +1254,9 @@ private static final String DEBUG = "DEBUG";
     	}
     }
     
-    private void printMatrixInfo() {
-    	float[] n = new float[9];
-    	matrix.getValues(n);
-    	Log.d(DEBUG, "Scale: " + n[Matrix.MSCALE_X] + " TransX: " + n[Matrix.MTRANS_X] + " TransY: " + n[Matrix.MTRANS_Y]);
-    }	
+//    private void printMatrixInfo() {
+//    	float[] n = new float[9];
+//    	matrix.getValues(n);
+//    	Log.d(DEBUG, "Scale: " + n[Matrix.MSCALE_X] + " TransX: " + n[Matrix.MTRANS_X] + " TransY: " + n[Matrix.MTRANS_Y]);
+//    }	
 }

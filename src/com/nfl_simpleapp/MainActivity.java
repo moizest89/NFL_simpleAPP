@@ -38,6 +38,7 @@ public class MainActivity extends SherlockFragmentActivity{
 			mListLayout = (ViewGroup) findViewById(R.id.activity_main_list_container);
 			if(mListLayout != null){
 				
+				@SuppressWarnings("rawtypes")
 				ListNoticesFragment listFragment = new ListNoticesFragment();
 				FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 				fragmentTransaction.replace(mListLayout.getId(), listFragment,ListNoticesFragment.class.getName());
