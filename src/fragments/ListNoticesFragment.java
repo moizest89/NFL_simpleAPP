@@ -80,7 +80,7 @@ public class ListNoticesFragment<DisplayFragment> extends SherlockFragment{
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
 				mContainerLayout = (ViewGroup) getActivity().findViewById(R.id.activity_main_description_container);
-				if(mContainerLayout == null){
+//				if(mContainerLayout == null){
 					HashMap<String, Object> data = new HashMap<String,Object>(); 
 					data =  jsonNotices.get(position);
 					Intent intent = new Intent(getActivity(),NoticeDetailActivity.class);
@@ -88,13 +88,13 @@ public class ListNoticesFragment<DisplayFragment> extends SherlockFragment{
 					
 					getActivity().startActivity(intent);
 					
-				}else{
-					try{
-						MainActivity.setDataInPaneTablet(getChildFragmentManager());
-					}catch(Exception e){
-						Log.e(TAG, e.getMessage());
-					}
-				}
+//				}else{
+//					try{
+//						MainActivity.setDataInPaneTablet(getChildFragmentManager());
+//					}catch(Exception e){
+//						Log.e(TAG, e.getMessage());
+//					}
+//				}
 			}
 			
 		});
