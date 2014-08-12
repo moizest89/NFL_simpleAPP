@@ -178,12 +178,12 @@ public class NoticeDetailActivity extends SherlockFragmentActivity{
 	
 	public String formatDate(String date_to_format){
 		final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z");
-		Date mStartDate = null;
+		Date simpleDate = null;
 		try {
-			mStartDate = FORMATTER.parse(date_to_format);
+			simpleDate = FORMATTER.parse(date_to_format);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		return mStartDate.toString();
+		return simpleDate.toString();
 	}
 }
