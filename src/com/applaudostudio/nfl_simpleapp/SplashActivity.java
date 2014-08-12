@@ -1,4 +1,4 @@
-package com.nfl_simpleapp;
+package com.applaudostudio.nfl_simpleapp;
 
 import java.util.Timer;
 import java.util.TimerTask;

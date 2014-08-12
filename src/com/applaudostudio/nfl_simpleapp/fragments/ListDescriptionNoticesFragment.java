@@ -1,4 +1,4 @@
-package fragments;
+package com.applaudostudio.nfl_simpleapp.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.nfl_simpleapp.R;
+import com.applaudostudio.nfl_simpleapp.R;
 
 public class ListDescriptionNoticesFragment extends SherlockFragment{
 

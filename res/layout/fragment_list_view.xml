@@ -7,7 +7,7 @@
     android:id="@+id/activity_main_root_container">
 
     <fragment
-        class="fragments.ListNoticesFragment"
+        class="com.applaudostudio.nfl_simpleapp.fragments.ListNoticesFragment"
         android:id="@+id/activity_main_list_container"
         android:name="fragments.ListNoticesFragment"
         android:layout_width="fill_parent"

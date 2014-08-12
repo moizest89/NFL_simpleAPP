@@ -1,4 +1,4 @@
-package customClasses;
+package com.applaudostudio.nfl_simpleapp.customClasses;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

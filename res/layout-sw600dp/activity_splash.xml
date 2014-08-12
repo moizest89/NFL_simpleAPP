@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:background="#082456">
 
-    <customClasses.DynamicImageView
+    <com.applaudostudio.nfl_simpleapp.customClasses.DynamicImageView
         android:id="@+id/touchImageView1"
         android:layout_width="220dp"
         android:layout_height="220dp"

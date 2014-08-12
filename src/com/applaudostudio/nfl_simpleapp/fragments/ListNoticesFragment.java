@@ -1,4 +1,4 @@
-package fragments;
+package com.applaudostudio.nfl_simpleapp.fragments;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import adapters.ListNoticesAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -29,8 +28,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.nfl_simpleapp.NoticeDetailActivity;
-import com.nfl_simpleapp.R;
+import com.applaudostudio.nfl_simpleapp.NoticeDetailActivity;
+import com.applaudostudio.nfl_simpleapp.R;
+import com.applaudostudio.nfl_simpleapp.adapters.ListNoticesAdapter;
 
 public class ListNoticesFragment<DisplayFragment> extends SherlockFragment{
 	
@@ -72,21 +72,12 @@ public class ListNoticesFragment<DisplayFragment> extends SherlockFragment{
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
 				mContainerLayout = (ViewGroup) getActivity().findViewById(R.id.activity_main_description_container);
-//				if(mContainerLayout == null){
 					HashMap<String, Object> data = new HashMap<String,Object>(); 
 					data =  jsonNotices.get(position);
 					Intent intent = new Intent(getActivity(),NoticeDetailActivity.class);
 					intent.putExtra("data", data);
 					
 					getActivity().startActivity(intent);
-					
-//				}else{
-//					try{
-//						MainActivity.setDataInPaneTablet(getChildFragmentManager());
-//					}catch(Exception e){
-//						Log.e(TAG, e.getMessage());
-//					}
-//				}
 			}
 			
 		});

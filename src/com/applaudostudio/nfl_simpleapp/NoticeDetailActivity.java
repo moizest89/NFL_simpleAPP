@@ -1,15 +1,26 @@
-package com.nfl_simpleapp;
+package com.applaudostudio.nfl_simpleapp;
 
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -22,10 +33,13 @@ public class NoticeDetailActivity extends SherlockFragmentActivity{
 	TextView TVDescriptionTitle,TVDescriptionNotice;
 	String title,address,article_picture,ticket_link,phone;
 	HashMap<String, Object> data = new HashMap<String,Object>();
+	ArrayList<HashMap<String,Object>> schedules = new ArrayList<HashMap<String,Object>>(); 
 	AQuery aq;
+	LinearLayout LLSchedules;
 	Bitmap preset;
 	double latitude;
 	double longitude;
+	private static LayoutInflater inflater=null;
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -34,12 +48,12 @@ public class NoticeDetailActivity extends SherlockFragmentActivity{
 		
 		setContentView(R.layout.item_notice_detail);
 		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#082456")));
-		
+		LinearLayout.LayoutParams paramsText = new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT);
 		//Get elements in view
 		IVDescriptionImage = (ImageView) findViewById(R.id.IVDescriptionImage);
 		TVDescriptionTitle = (TextView) findViewById(R.id.TVDescriptionTitle);
 		TVDescriptionNotice = (TextView) findViewById(R.id.TVDescriptionNotice);
-		
+		LLSchedules = (LinearLayout) findViewById(R.id.LLSchedules);
 		
 		//New Instance from AQ
 		aq= new AQuery(NoticeDetailActivity.this);
@@ -56,6 +70,9 @@ public class NoticeDetailActivity extends SherlockFragmentActivity{
 			phone = (String) data.get("phone");
 			latitude = (Double) data.get("latitude");
 			longitude = (Double) data.get("longitude");
+			schedules = (ArrayList<HashMap<String,Object>>) data.get("schedules");
+			
+			System.out.println("schedules: "+schedules);
 		}
 		
 		
@@ -78,18 +95,49 @@ public class NoticeDetailActivity extends SherlockFragmentActivity{
 				startActivity(intent);
 			}
 		});
-	}
-	
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-		finish();
-	}
-	
-	@Override
-	public void finish() {
-		super.finish();
+		
+		//add schedules
+		if(schedules.size() > 0 ){
+			for(int shed =0; shed < schedules.size(); shed++){
+				//Inflate view
+				//Title
+				TextView rowTitle = new TextView(this);
+				rowTitle.setText("Date # "+(shed + 1));
+				rowTitle.setTextSize(18);
+				rowTitle.setTypeface(rowTitle.getTypeface(), Typeface.BOLD);
+				rowTitle.setLayoutParams(paramsText);
+				
+				//start_date
+				inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				View rowStart = inflater.inflate(R.layout.item_schedules, null);
+				TextView titleStart = (TextView) rowStart.findViewById(R.id.title);
+				TextView dateStart = (TextView) rowStart.findViewById(R.id.date);
+				//Get Data
+				String start_date = (String) schedules.get(shed).get("start_date");
+				titleStart.setText("Start Date: ");
+				
+				dateStart.setText(formatDate(start_date));
+				
+				
+				//end_date
+				inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				View rowEnd = inflater.inflate(R.layout.item_schedules, null);
+				TextView titleEnd = (TextView) rowEnd.findViewById(R.id.title);
+				TextView dateEnd = (TextView) rowEnd.findViewById(R.id.date);
+				//Get Data
+				String end_date = (String) schedules.get(shed).get("end_date");
+				titleEnd.setText("End Date: ");
+				dateEnd.setText(formatDate(end_date));
+				LLSchedules.addView(rowTitle);
+				LLSchedules.addView(rowStart);
+				LLSchedules.addView(rowEnd);
+			}
+		}else{
+			TextView noAvaliable = new TextView(this);
+			noAvaliable.setText("Schedules not avaliable");
+			noAvaliable.setLayoutParams(paramsText);
+			LLSchedules.addView(noAvaliable);
+		}
 	}
 	
 
@@ -127,4 +175,15 @@ public class NoticeDetailActivity extends SherlockFragmentActivity{
 	    // more code here for other cases
 		return false;
 	  }
+	
+	public String formatDate(String date_to_format){
+		final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z");
+		Date mStartDate = null;
+		try {
+			mStartDate = FORMATTER.parse(date_to_format);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return mStartDate.toString();
+	}
 }

@@ -4,4 +4,5 @@
     <string name="menu_map">View event location</string>
 	<string name="menu_share">Share event</string>
 	<string name="menu_reload">Reload data</string>
+	<string name="google_api_key">AIzaSyDIKRSuyNszTpbhqvO-zs-HBvFscqqrf9Q</string>
 </resources>

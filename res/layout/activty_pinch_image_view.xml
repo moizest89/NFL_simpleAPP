@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
 	
-    <customClasses.TouchImageView
+    <com.applaudostudio.nfl_simpleapp.customClasses.TouchImageView
         android:id="@+id/TIVPinchImage"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

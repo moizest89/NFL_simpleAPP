@@ -1,4 +1,4 @@
-package adapters;
+package com.applaudostudio.nfl_simpleapp.adapters;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
-import com.nfl_simpleapp.R;
+import com.applaudostudio.nfl_simpleapp.R;
 
 public class ListNoticesAdapter extends BaseAdapter{
 	

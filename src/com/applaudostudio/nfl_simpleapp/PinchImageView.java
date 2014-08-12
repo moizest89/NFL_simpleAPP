@@ -1,4 +1,4 @@
-package com.nfl_simpleapp;
+package com.applaudostudio.nfl_simpleapp;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
 import com.androidquery.callback.BitmapAjaxCallback;
+import com.applaudostudio.nfl_simpleapp.customClasses.TouchImageView;
 
-import customClasses.TouchImageView;
 
 public class PinchImageView extends SherlockActivity{
 

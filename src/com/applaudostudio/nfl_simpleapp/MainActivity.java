@@ -1,4 +1,4 @@
-package com.nfl_simpleapp;
+package com.applaudostudio.nfl_simpleapp;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -9,9 +9,9 @@ import android.util.Log;
 import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.applaudostudio.nfl_simpleapp.fragments.ListDescriptionNoticesFragment;
+import com.applaudostudio.nfl_simpleapp.fragments.ListNoticesFragment;
 
-import fragments.ListDescriptionNoticesFragment;
-import fragments.ListNoticesFragment;
 
 public class MainActivity extends SherlockFragmentActivity{
 	//
